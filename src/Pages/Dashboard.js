@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import axios from "../services/api";
 import JobForm from "../components/JobForm";
 import Sidebar from "../components/Sidebar";
+import TaskComponent from "./TaskBoard";
 import { SearchIcon } from "@heroicons/react/outline";
 import Column from "../components/ColumnComponent";
 import { Modal, Box, Typography, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import BuyMeACoffeeButton from "./CoffeeTip";
 
 const Dashboard = () => {
   const [jobs, setJobs] = useState([]);
   const [authToken, setAuthToken] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [username, setUsername] = useState("User");
+  const [currentView, setCurrentView] = useState("dashboard"); // New state to manage the view
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -104,9 +107,9 @@ const Dashboard = () => {
 
   return (
     <div className="flex min-h-screen font-body-18 bg-gray-100 text-white">
-      <Sidebar onLogout={logout} />
+      <Sidebar onLogout={logout} setCurrentView={setCurrentView} />
       <div className="flex-1 flex flex-col ml-56">
-        <div className="flex items-center justify-between p-6  bg-gray-100 ">
+        <div className="flex items-center justify-between p-6 bg-gray-100">
           <div className="relative flex items-center rounded-lg">
             <SearchIcon className="absolute left-3 w-6 h-6 text-gray-500" />
             <input
@@ -117,53 +120,60 @@ const Dashboard = () => {
           </div>
           <div className="flex items-center space-x-3">
             <span>{username}</span>
-            <div className="w-8 h-8 bg-gray-600 rounded-full"></div>
           </div>
         </div>
-        <h1 className="text-2xl ml-7 font-bold mt-4">Dashboard</h1>
+        <h1 className="text-2xl ml-7 font-bold mt-4">
+          {currentView === "dashboard" ? "Dashboard" : "Tasks"}
+        </h1>
         <div className="flex-1 p-4 grid grid-cols-3 gap-4">
-          <Column
-            title="Wishlist"
-            jobs={categorizedJobs.Wishlist}
-            updateJob={updateJob}
-            deleteJob={deleteJob}
-            toggleForm={toggleForm}
-          />
-          <Column
-            title="Applied"
-            jobs={categorizedJobs.Applied}
-            updateJob={updateJob}
-            deleteJob={deleteJob}
-            toggleForm={toggleForm}
-          />
-          <Column
-            title="Interview"
-            jobs={categorizedJobs.Interview}
-            updateJob={updateJob}
-            deleteJob={deleteJob}
-            toggleForm={toggleForm}
-          />
-          <Column
-            title="Offered"
-            jobs={categorizedJobs.Offered}
-            updateJob={updateJob}
-            deleteJob={deleteJob}
-            toggleForm={toggleForm}
-          />
-          <Column
-            title="Rejected"
-            jobs={categorizedJobs.Rejected}
-            updateJob={updateJob}
-            deleteJob={deleteJob}
-            toggleForm={toggleForm}
-          />
-          <Column
-            title="Follow-up"
-            jobs={categorizedJobs.FollowUp}
-            updateJob={updateJob}
-            deleteJob={deleteJob}
-            toggleForm={toggleForm}
-          />
+          {currentView === "dashboard" ? (
+            <>
+              <Column
+                title="Wishlist"
+                jobs={categorizedJobs.Wishlist}
+                updateJob={updateJob}
+                deleteJob={deleteJob}
+                toggleForm={toggleForm}
+              />
+              <Column
+                title="Applied"
+                jobs={categorizedJobs.Applied}
+                updateJob={updateJob}
+                deleteJob={deleteJob}
+                toggleForm={toggleForm}
+              />
+              <Column
+                title="Interview"
+                jobs={categorizedJobs.Interview}
+                updateJob={updateJob}
+                deleteJob={deleteJob}
+                toggleForm={toggleForm}
+              />
+              <Column
+                title="Offered"
+                jobs={categorizedJobs.Offered}
+                updateJob={updateJob}
+                deleteJob={deleteJob}
+                toggleForm={toggleForm}
+              />
+              <Column
+                title="Rejected"
+                jobs={categorizedJobs.Rejected}
+                updateJob={updateJob}
+                deleteJob={deleteJob}
+                toggleForm={toggleForm}
+              />
+              <Column
+                title="Follow-up"
+                jobs={categorizedJobs.FollowUp}
+                updateJob={updateJob}
+                deleteJob={deleteJob}
+                toggleForm={toggleForm}
+              />
+            </>
+          ) : (
+            <TaskComponent />
+          )}
         </div>
         <div className="p-6">
           <Modal

@@ -8,8 +8,11 @@ import {
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
-import Dashboard from "./Pages/Dashboard";
-import HomePage from "./Pages/HomePage"; // Import HomePage component
+import Dashboard from "./Pages/Dashboard"
+import HomePage from "./Pages/HomePage";
+import TaskComponent from "./Pages/TaskBoard";
+import Analytics from "./Pages/Analytics";
+import BuyMeACoffeeButton from "./Pages/CoffeeTip";
 
 const theme = createTheme(); // Create a theme
 
@@ -17,7 +20,6 @@ const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
 
   useEffect(() => {
-    // Update localStorage whenever the token state changes
     if (token) {
       localStorage.setItem("token", token);
     } else {
@@ -36,6 +38,9 @@ const App = () => {
           <Route path="/dashboard">
             {token ? <Dashboard token={token} /> : <Redirect to="/login" />}
           </Route>
+          <Route path="/taskboard" component={TaskComponent} />
+          <Route path="/analysis" component={Analytics} />
+          <Route path="/coffeetip" component={BuyMeACoffeeButton} />
           <Route path="/">
             <HomePage /> {/* Always render HomePage for the root route */}
           </Route>

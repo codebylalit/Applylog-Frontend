@@ -7,6 +7,8 @@ const cors = require("cors"); // Import the cors package
 const PORT = process.env.PORT || 3000;
 const authRouter = require("./Routes/authRoutes");
 const jobRouter = require("./Routes/JobRoutes");
+const taskRouter = require("./Routes/tasks");
+
 
 // Middleware
 app.use(bodyParser.json());
@@ -34,6 +36,7 @@ db.once("open", () => {
 
 app.use("/api/auth", authRouter);
 app.use("/api/jobs", jobRouter); // Mount job routes
+app.use("/api/tasks", taskRouter); // Mount task routes
 
 // Start server
 app.listen(PORT, () => {

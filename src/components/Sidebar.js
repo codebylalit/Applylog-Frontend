@@ -5,8 +5,9 @@ import {
   ClipboardListIcon,
   ChartBarIcon,
   CogIcon,
-  LogoutIcon, // Assuming you have a logout icon, if not you can remove this line
+  LogoutIcon,
 } from "@heroicons/react/outline";
+import { LocalCafe, LocalCafeOutlined } from "@mui/icons-material";
 
 const Sidebar = ({ onLogout }) => {
   const location = useLocation();
@@ -43,34 +44,34 @@ const Sidebar = ({ onLogout }) => {
             </li>
             <li className="ml-[-25px]">
               <Link
-                to="/board"
+                to="/taskboard"
                 className={`flex items-center space-x-2 no-underline text-lg ${
-                  isActive("/board")
+                  isActive("/taskboard")
                     ? "text-white relative"
                     : "text-gray-500 hover:text-white"
                 }`}
               >
                 <div className="flex items-center relative pl-4">
-                  {isActive("/board") && (
-                    <span className="absolute inset-y-0 left-0 w-2 bg-red-500 rounded-full ml-[-23px] "></span>
+                  {isActive("/taskboard") && (
+                    <span className="absolute inset-y-0 left-0 w-2 bg-red-500 rounded-full ml-[-23px]"></span>
                   )}
                   <ClipboardListIcon className="h-6 w-6" />
                 </div>
-                <span>Board</span>
+                <span>Tasks</span>
               </Link>
             </li>
             <li className="ml-[-25px]">
               <Link
-                to="/analytics"
+                to="/analysis"
                 className={`flex items-center space-x-2 no-underline text-lg ${
-                  isActive("/analytics")
+                  isActive("/analysis")
                     ? "text-white relative"
                     : "text-gray-500 hover:text-white"
                 }`}
               >
                 <div className="flex items-center relative pl-4">
-                  {isActive("/analytics") && (
-                    <span className="absolute inset-y-0 left-0 w-2 bg-red-500 rounded-full ml-[-23px] "></span>
+                  {isActive("/analysis") && (
+                    <span className="absolute inset-y-0 left-0 w-2 bg-red-500 rounded-full ml-[-23px]"></span>
                   )}
                   <ChartBarIcon className="h-6 w-6" />
                 </div>
@@ -79,7 +80,7 @@ const Sidebar = ({ onLogout }) => {
             </li>
             <li className="ml-[-25px]">
               <Link
-                to="/settings"
+                to="/coffeetip"
                 className={`flex items-center space-x-2 no-underline text-lg ${
                   isActive("/settings")
                     ? "text-white relative"
@@ -87,12 +88,12 @@ const Sidebar = ({ onLogout }) => {
                 }`}
               >
                 <div className="flex items-center relative pl-4">
-                  {isActive("/settings") && (
-                    <span className="absolute inset-y-0 left-0 w-2 bg-red-500 rounded-full ml-[-23px] "></span>
+                  {isActive("/coffeetip") && (
+                    <span className="absolute inset-y-0 left-0 w-2 bg-red-500 rounded-full ml-[-23px]"></span>
                   )}
-                  <CogIcon className="h-6 w-6" />
+                  <LocalCafeOutlined className="h-6 w-6" />
                 </div>
-                <span>Settings</span>
+                <span>Coffee Tip</span>
               </Link>
             </li>
           </ul>

@@ -70,29 +70,31 @@ const Column = ({ title, jobs, updateJob, deleteJob, toggleForm }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const getBadgeColor = (title) => {
-    switch (title) {
-      case "Applied":
-        return "#4682B4"; // Bright Yellow
-      case "Interview":
-        return "#009688"; // Deep Orange
-      case "Wishlist":
-        return "#673AB7"; // Deep Purple
-      case "Offered":
-        return "#006400"; // Green
-      case "Rejected":
-        return "#FF0000"; // Red
-      default:
-        return "#FF9800"; // Orange
-    }
-  };
+ const getBadgeColor = (title) => {
+   switch (title) {
+     case "Applied":
+       return "#4BC0C0"; // Bright Red
+     case "Interview":
+       return "#36A2EB"; // Bright Blue
+     case "Wishlist":
+       return "#9966FF"; // Bright Purple
+     case "Offered":
+       return "#FFCE56"; // Bright Yellow
+     case "Rejected":
+       return "#FF6384"; // Bright Green
+     case "Follow-up":
+       return "#FF9F40"; // Bright Orange
+     default:
+       return "#FFD180"; // Default color
+   }
+ };
 
   return (
     <Box
       sx={{
         flex: 1,
         margin: "0 10px",
-        backgroundColor: "#ddd",
+        backgroundColor: "#333",
         borderRadius: "8px",
         padding: "16px",
         boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
@@ -105,7 +107,7 @@ const Column = ({ title, jobs, updateJob, deleteJob, toggleForm }) => {
         mb={2}
       >
         <Box display="flex" alignItems="center">
-          <Typography variant="h6" sx={{ fontWeight: "bold", color: "#333" }}>
+          <Typography variant="h6" sx={{ fontWeight: "bold", color: "gray" }}>
             {title}
           </Typography>
           <Badge
@@ -127,7 +129,7 @@ const Column = ({ title, jobs, updateJob, deleteJob, toggleForm }) => {
                 minWidth: "24px",
                 borderRadius: "50%",
                 backgroundColor: getBadgeColor(title),
-                color: "white",
+                color: "black",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -147,7 +149,7 @@ const Column = ({ title, jobs, updateJob, deleteJob, toggleForm }) => {
             position: "relative",
             color: "white",
             borderRadius: "8px",
-            backgroundColor: "fff",
+            backgroundColor: getBadgeColor(title),
             boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
             transition: "transform 0.2s",
             "&:hover": {
@@ -160,6 +162,7 @@ const Column = ({ title, jobs, updateJob, deleteJob, toggleForm }) => {
               display="flex"
               justifyContent="space-between"
               alignItems="center"
+              
             >
               <Box>
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
