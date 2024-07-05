@@ -1,5 +1,3 @@
-// models/Job.js
-
 const mongoose = require("mongoose");
 
 const jobSchema = new mongoose.Schema({
@@ -18,11 +16,37 @@ const jobSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["Applied", "Interview", "Offered", "Rejected"],
+    enum: [
+      "Applied",
+      "Interview",
+      "Offered",
+      "Rejected",
+      "Follow-up",
+      "Wishlist",
+    ],
     default: "Applied",
+  },
+  salary: {
+    type: Number,
+  },
+  jobType: {
+    type: String,
+    enum: ["Full-Time", "Part-Time", "Contract", "Internship"],
+  },
+  location: {
+    type: String,
+  },
+  url: {
+    type: String,
+  },
+  appliedOn: {
+    type: Date,
   },
   deadline: {
     type: Date,
+  },
+  description: {
+    type: String,
   },
   notes: {
     type: String,

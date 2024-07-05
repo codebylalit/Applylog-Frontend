@@ -1,31 +1,7 @@
 import React, { useState } from "react";
-import { makeStyles } from "@mui/styles";
-import { Container, TextField, Button, Typography, Alert } from "@mui/material";
 import { useHistory } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: "#1976d2",
-    color: "#fff",
-    "&:hover": {
-      backgroundColor: "#115293",
-    },
-  },
-}));
-
-const Register = () => {
-  const classes = useStyles();
+const Register = ({ className = "", setToken }) => {
   const history = useHistory();
   const [formData, setFormData] = useState({
     username: "",
@@ -65,66 +41,81 @@ const Register = () => {
     }
   };
 
+  const onLoginLinkClick = () => {
+    history.push("/login");
+  };
+
   return (
-    <Container component="main" maxWidth="xs" className={classes.root}>
-      <Typography component="h1" variant="h5">
-        Register
-      </Typography>
-      {error && <Alert severity="error">{error}</Alert>}
-      {success && (
-        <Alert severity="success">
-          Registration successful! Redirecting to login...
-        </Alert>
-      )}
-      <form className={classes.form} onSubmit={handleSubmit}>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="username"
-          label="Username"
-          name="username"
-          autoComplete="username"
-          autoFocus
-          value={formData.username}
-          onChange={handleInputChange}
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="new-password"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          className={classes.submit}
-        >
-          Register
-        </Button>
-      </form>
-    </Container>
+    <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center font-body-18">
+      <div className={`w-full max-w-xs p-8 ${className}`}>
+        <h1 className="text-2xl font-bold text-white mb-4 text-center">
+          Start for free
+        </h1>
+        {error && <p className="text-red-500 text-xs mt-2">{error}</p>}
+        {success && (
+          <p className="text-green-500 text-xs mt-2">
+            Registration successful! Redirecting to{" "}
+            <span
+              className="underline cursor-pointer"
+              onClick={onLoginLinkClick}
+            >
+              login
+            </span>
+            ...
+          </p>
+        )}
+        <form onSubmit={handleSubmit}>
+          <input
+            className="w-full box-border outline-none bg-gray-100 text-white self-stretch h-12 rounded-lg mb-3 px-3 border-[1px] border-solid border-darkslategray font-inter font-semibold text-xs text-dimgray-200"
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+            value={formData.username}
+            onChange={handleInputChange}
+            autoComplete="username"
+            required
+          />
+          <input
+            className="w-full box-border outline-none bg-gray-100 text-white self-stretch h-12 rounded-lg mb-3 px-3 border-[1px] border-solid border-darkslategray font-inter font-semibold text-xs text-dimgray-200"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleInputChange}
+            autoComplete="email"
+            required
+          />
+          <input
+            className="w-full box-border outline-none bg-gray-100 text-white self-stretch h-12 rounded-lg mb-3 px-3 border-[1px] border-solid border-darkslategray font-inter font-semibold text-xs text-dimgray-200"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleInputChange}
+            autoComplete="new-password"
+            required
+          />
+          <button
+            className="w-full box-border outline-none bg-white text-gray-800 self-stretch h-12 rounded-lg mb-3 px-5 border-solid border-darkslategray font-inter font-semibold text-xs hover:bg-gray-200"
+            type="submit"
+          >
+            Start for free
+          </button>
+        </form>
+        <div className="mt-2 text-sm text-center">
+          <span>Already have an account?</span>{" "}
+          <span
+            className="text-white cursor-pointer underline"
+            onClick={onLoginLinkClick}
+          >
+            Log in
+          </span>
+        </div>
+      </div>
+    </div>
   );
 };
 

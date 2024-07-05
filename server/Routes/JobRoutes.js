@@ -1,5 +1,3 @@
-// server/routes/jobRoutes.js
-
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/authMiddleware"); // Ensure you have middleware for authentication if needed
@@ -10,14 +8,32 @@ router.use(auth);
 // POST /api/jobs - Create a new job
 router.post("/", auth, async (req, res) => {
   try {
-    const { company, position, status, deadline, notes } = req.body;
+    const {
+      company,
+      position,
+      status,
+      salary,
+      jobType,
+      location,
+      url,
+      appliedOn,
+      deadline,
+      description,
+      notes,
+    } = req.body;
 
     const newJob = new Job({
       user_id: req.user._id, // Assuming user ID is stored in req.user
       company,
       position,
       status,
+      salary,
+      jobType,
+      location,
+      url,
+      appliedOn,
       deadline,
+      description,
       notes,
     });
 
@@ -28,8 +44,6 @@ router.post("/", auth, async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 });
-
-
 
 // GET /api/jobs - Get all jobs for the authenticated user
 router.get("/", auth, async (req, res) => {

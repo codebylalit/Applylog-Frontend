@@ -1,85 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Container, Typography, Button, Grid, Paper, Box } from "@mui/material";
-
-const HomePage = () => {
+import TopBar1280px from "../components/TopBar1280px";
+import Header1280px from "../components/Header1280px";
+import CTA1280px from "../components/CTA1280px";
+import Footer1280px from "../components/Footer1280px";
+import HomeScreen from "./ScreenshotHome.png"
+const Home = () => {
   return (
-    <Container maxWidth="lg">
-      <Box my={4}>
-        <Typography variant="h3" component="h1" gutterBottom>
-          Track & Organize Your Job Search
-        </Typography>
-        <Typography variant="h6" component="p" gutterBottom>
-          The leading tool for organizing, tracking, and managing all of your
-          job applications in one place.
-        </Typography>
-        <Box my={4}>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            component={Link}
-            to="/register"
-          >
-            Sign up
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            size="large"
-            component={Link}
-            to="/login"
-            style={{ marginLeft: 16 }}
-          >
-            Log in
-          </Button>
-        </Box>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
-            <Paper elevation={3} style={{ padding: 16 }}>
-              <Typography variant="h5" gutterBottom>
-                Save jobs throughout your search
-              </Typography>
-              <Typography variant="body1">
-                A fast, convenient way to bookmark jobs
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Paper elevation={3} style={{ padding: 16 }}>
-              <Typography variant="h5" gutterBottom>
-                Track & organize job opportunities by stage
-              </Typography>
-              <Typography variant="body1">
-                Keep a high-level view of your job search pipeline
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Paper elevation={3} style={{ padding: 16 }}>
-              <Typography variant="h5" gutterBottom>
-                Get job description insights
-              </Typography>
-              <Typography variant="body1">
-                View rich keyword & skill insights for every job
-              </Typography>
-            </Paper>
-          </Grid>
-        </Grid>
-        <Box my={4}>
-          <Typography variant="h6" component="p" gutterBottom>
-            <strong>Attachments</strong>
-          </Typography>
-          <Paper elevation={3} style={{ padding: 16 }}>
-            <Typography variant="subtitle1">
-              Marketing Manager Resume
-            </Typography>
-            <Typography variant="body2">Match: 67% | Score: 75%</Typography>
-          </Paper>
-        </Box>
-      </Box>
-    </Container>
+    <div className="w-full relative bg-gray-100 flex flex-col items-start justify-start leading-[normal] tracking-[normal]">
+      <TopBar1280px />
+      <Header1280px />
+      <section className="self-stretch bg-gray-100 overflow-hidden flex flex-col items-center justify-start py-0 px-5 box-border gap-[66.5px] max-w-full lg:gap-[33px] mq750:gap-[17px]">
+      </section>
+      <section className="self-stretch h-[700px] relative bg-gray-100 overflow-hidden shrink-0">
+        <div className="absolute top-[calc(50%_-_250px)] left-[calc(50%_-_540px)] rounded-xl bg-cornsilk w-[1080px] h-[500px]" />
+        <img
+          className="absolute top-[100px] left-[calc(50%_-_540px)] w-[1080px] h-[500px] object-contain z-[1]"
+          alt=""
+          src= {HomeScreen}
+        />
+      </section>
+      <CTA1280px />
+      <Footer1280px />
+    </div>
   );
 };
 
-export default HomePage;
+export default Home;

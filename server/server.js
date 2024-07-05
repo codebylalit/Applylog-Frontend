@@ -34,6 +34,7 @@ db.once("open", () => {
 
 app.use("/api/auth", authRouter);
 app.use("/api/jobs", jobRouter); // Mount job routes
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
