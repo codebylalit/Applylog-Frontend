@@ -13,6 +13,9 @@ import HomePage from "./Pages/HomePage";
 import TaskComponent from "./Pages/TaskBoard";
 import Analytics from "./Pages/Analytics";
 import Calendar from "./Pages/Calender";
+import PrivacyPolicy from "./components/data/Privacy";
+import TermsOfUse from "./components/data/termsofuse";
+import CookiesPolicy from "./components/data/cookies";
 
 const theme = createTheme(); // Create a theme
 
@@ -41,6 +44,10 @@ const App = () => {
           <Route path="/taskboard" component={TaskComponent} />
           <Route path="/analysis" component={Analytics} />
           <Route path="/calender" component={Calendar} />
+          <Route path="/privacy-policy" component={PrivacyPolicy} />
+          <Route path="/terms-of-use" component={TermsOfUse} />
+          <Route path="/cookies-policy" component={CookiesPolicy} />
+
           <Route path="/">
             <HomePage /> {/* Always render HomePage for the root route */}
           </Route>

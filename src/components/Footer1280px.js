@@ -1,12 +1,8 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
+import { Link as RouterLink } from "react-router-dom"; // Assuming you're using react-router-dom
 
 const Footer1280px = ({ className = "" }) => {
-  const onSecondaryCTAClick = useCallback(() => {
-    window.open(
-      "https://animaapp.com/?utm_source=figma-samples&utm_campaign=figma-lp-pets&utm_medium=figma-samples"
-    );
-  }, []);
 
   return (
     <footer
@@ -18,7 +14,7 @@ const Footer1280px = ({ className = "" }) => {
           <div className="flex flex-row items-start justify-start p-[5px] relative">
             <div className="h-full w-full absolute !m-[0] top-[0px] right-[0px] bottom-[0px] left-[0px] bg-gray-400" />
             <div className="relative leading-[24px] font-semibold inline-block min-w-[79px] z-[1] mq450:text-lgi mq450:leading-[19px]">
-            ApplyLog
+              ApplyLog
             </div>
           </div>
           <div className="self-stretch flex flex-row items-start justify-start gap-[30px] text-lg mq750:flex-wrap">
@@ -31,13 +27,28 @@ const Footer1280px = ({ className = "" }) => {
               </div>
             </div>
             <div className="flex-1 relative leading-[32px] font-semibold inline-block min-w-[86px]">
-              Privacy policy
+              <RouterLink
+                to="/privacy-policy"
+                className="footer-link no-underline text-white"
+              >
+                Privacy Policy
+              </RouterLink>
             </div>
             <div className="flex-1 relative leading-[32px] font-semibold inline-block min-w-[86px]">
-              Cookies policy
+              <RouterLink
+                to="/cookies-policy"
+                className="footer-link no-underline text-white"
+              >
+                Cookies Policy
+              </RouterLink>
             </div>
             <div className="relative leading-[32px] font-semibold inline-block min-w-[117px]">
-              Terms of use
+              <RouterLink
+                to="/terms-of-use"
+                className="footer-link no-underline text-white"
+              >
+                Terms of Use
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -53,7 +64,7 @@ const Footer1280px = ({ className = "" }) => {
             />
             <button
               className="cursor-pointer [border:none] py-[9px] px-16 bg-plum rounded-mini flex flex-row items-start justify-start relative gap-[10px] hover:bg-cornflowerblue"
-              onClick={onSecondaryCTAClick}
+              // onClick={}
             >
               <div className="h-full w-full absolute !m-[0] top-[0px] right-[0px] bottom-[0px] left-[0px] rounded-mini bg-plum" />
               <div className="relative text-lg leading-[32px] font-body-18 text-darkslategray text-center inline-block min-w-[46px] z-[1]">

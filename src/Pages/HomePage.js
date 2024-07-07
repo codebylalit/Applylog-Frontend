@@ -13,12 +13,12 @@ const Home = () => {
       <section className="self-stretch h-[700px] relative bg-gray-100 overflow-hidden shrink-0">
         <div className="absolute top-[calc(50%_-_250px)] left-[calc(50%_-_540px)] rounded-xl bg-cornsilk w-[1080px] h-[500px]" />
         <img
-          className="absolute top-[100px] left-[calc(50%_-_540px)] w-[1080px] h-[500px] object-contain z-[1]"
+          className="absolute top-[180px] left-[calc(50%_-_540px)] w-[1080px] h-[420px] object-contain z-[1]"
           alt=""
           src= {HomeScreen}
         />
       </section>
-      <CTA1280px />
+      {/* <CTA1280px /> */}
       <Footer1280px />
     </div>
   );
