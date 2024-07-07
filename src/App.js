@@ -12,7 +12,7 @@ import Dashboard from "./Pages/Dashboard"
 import HomePage from "./Pages/HomePage";
 import TaskComponent from "./Pages/TaskBoard";
 import Analytics from "./Pages/Analytics";
-import BuyMeACoffeeButton from "./Pages/CoffeeTip";
+import Calendar from "./Pages/Calender";
 
 const theme = createTheme(); // Create a theme
 
@@ -40,7 +40,7 @@ const App = () => {
           </Route>
           <Route path="/taskboard" component={TaskComponent} />
           <Route path="/analysis" component={Analytics} />
-          <Route path="/coffeetip" component={BuyMeACoffeeButton} />
+          <Route path="/calender" component={Calendar} />
           <Route path="/">
             <HomePage /> {/* Always render HomePage for the root route */}
           </Route>

@@ -79,8 +79,12 @@ const JobForm = ({ fetchJobs, authToken }) => {
   };
 
   return (
-    <Container component="main" maxWidth="sm" className={classes.root}>
-      <form className={classes.form} onSubmit={handleSubmit}>
+    <Container
+      component="main"
+      maxWidth="sm"
+      className=" rounded-xl mx-auto mt-8 font-body-18"
+    >
+      <form className="space-y-6" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -94,6 +98,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
               autoFocus
               value={formData.company}
               onChange={handleInputChange}
+              className="bg-white rounded-md"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -107,6 +112,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
               autoComplete="position"
               value={formData.position}
               onChange={handleInputChange}
+              className="bg-white rounded-md"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -119,6 +125,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
               name="status"
               value={formData.status}
               onChange={handleInputChange}
+              className="bg-white rounded-md"
             >
               <MenuItem value="Applied">Applied</MenuItem>
               <MenuItem value="Interview">Interview</MenuItem>
@@ -138,6 +145,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
               autoComplete="salary"
               value={formData.salary}
               onChange={handleInputChange}
+              className="bg-white rounded-md"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -150,6 +158,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
               name="jobType"
               value={formData.jobType}
               onChange={handleInputChange}
+              className="bg-white rounded-md"
             >
               <MenuItem value="Full-Time">Full-Time</MenuItem>
               <MenuItem value="Part-Time">Part-Time</MenuItem>
@@ -167,6 +176,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
               autoComplete="location"
               value={formData.location}
               onChange={handleInputChange}
+              className="bg-white rounded-md"
             />
           </Grid>
           <Grid item xs={12}>
@@ -179,6 +189,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
               autoComplete="url"
               value={formData.url}
               onChange={handleInputChange}
+              className="bg-white rounded-md"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -194,6 +205,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
               }}
               value={formData.appliedOn}
               onChange={handleInputChange}
+              className="bg-white rounded-md"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -209,6 +221,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
               }}
               value={formData.deadline}
               onChange={handleInputChange}
+              className="bg-white rounded-md"
             />
           </Grid>
           <Grid item xs={12}>
@@ -223,6 +236,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
               autoComplete="description"
               value={formData.description}
               onChange={handleInputChange}
+              className="bg-white rounded-md"
             />
           </Grid>
         </Grid>
@@ -230,7 +244,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
           type="submit"
           fullWidth
           variant="contained"
-          className={classes.submit}
+          className= "text-white py-2 px-4 rounded-md mt-4"
         >
           Save & Close
         </Button>

@@ -6,8 +6,9 @@ import {
   ChartBarIcon,
   CogIcon,
   LogoutIcon,
+  CalendarIcon,
 } from "@heroicons/react/outline";
-import { LocalCafe, LocalCafeOutlined } from "@mui/icons-material";
+import { FeedbackOutlined, LocalCafe, LocalCafeOutlined } from "@mui/icons-material";
 
 const Sidebar = ({ onLogout }) => {
   const location = useLocation();
@@ -80,7 +81,7 @@ const Sidebar = ({ onLogout }) => {
             </li>
             <li className="ml-[-25px]">
               <Link
-                to="/coffeetip"
+                to="/calender"
                 className={`flex items-center space-x-2 no-underline text-lg ${
                   isActive("/settings")
                     ? "text-white relative"
@@ -88,12 +89,12 @@ const Sidebar = ({ onLogout }) => {
                 }`}
               >
                 <div className="flex items-center relative pl-4">
-                  {isActive("/coffeetip") && (
+                  {isActive("/calender") && (
                     <span className="absolute inset-y-0 left-0 w-2 bg-red-500 rounded-full ml-[-23px]"></span>
                   )}
-                  <LocalCafeOutlined className="h-6 w-6" />
+                  <CalendarIcon className="h-6 w-6" />
                 </div>
-                <span>Coffee Tip</span>
+                <span>Calendar</span>
               </Link>
             </li>
           </ul>

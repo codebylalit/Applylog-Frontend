@@ -7,14 +7,14 @@ import { SearchIcon } from "@heroicons/react/outline";
 import Column from "../components/ColumnComponent";
 import { Modal, Box, Typography, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import BuyMeACoffeeButton from "./CoffeeTip";
 
 const Dashboard = () => {
   const [jobs, setJobs] = useState([]);
   const [authToken, setAuthToken] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [username, setUsername] = useState("User");
-  const [currentView, setCurrentView] = useState("dashboard"); // New state to manage the view
+  const [currentView, setCurrentView] = useState("dashboard");
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -93,16 +93,22 @@ const Dashboard = () => {
     FollowUp: jobs.filter((job) => job.status === "Follow-up"),
   };
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 600,
-    bgcolor: "background.paper",
-    boxShadow: 24,
-    p: 4,
-    borderRadius: 3,
+  // Function to highlight matching parts of the title or description
+  const highlightSearchTerm = (text) => {
+    const lowerText = text ? text.toLowerCase() : "";
+    const lowerQuery = searchQuery.toLowerCase();
+    const index = lowerText.indexOf(lowerQuery);
+    if (index === -1) return text;
+    const highlightedText = (
+      <>
+        {text.substring(0, index)}
+        <span className="bg-yellow-200">
+          {text.substring(index, index + searchQuery.length)}
+        </span>
+        {text.substring(index + searchQuery.length)}
+      </>
+    );
+    return highlightedText;
   };
 
   return (
@@ -115,6 +121,8 @@ const Dashboard = () => {
             <input
               type="text"
               placeholder="Search Activity"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-11 pr-4 py-2 focus:outline-none text-lg text-gray-300 bg-gray-300 rounded-lg"
             />
           </div>
@@ -128,48 +136,18 @@ const Dashboard = () => {
         <div className="flex-1 p-4 grid grid-cols-3 gap-4">
           {currentView === "dashboard" ? (
             <>
-              <Column
-                title="Wishlist"
-                jobs={categorizedJobs.Wishlist}
-                updateJob={updateJob}
-                deleteJob={deleteJob}
-                toggleForm={toggleForm}
-              />
-              <Column
-                title="Applied"
-                jobs={categorizedJobs.Applied}
-                updateJob={updateJob}
-                deleteJob={deleteJob}
-                toggleForm={toggleForm}
-              />
-              <Column
-                title="Interview"
-                jobs={categorizedJobs.Interview}
-                updateJob={updateJob}
-                deleteJob={deleteJob}
-                toggleForm={toggleForm}
-              />
-              <Column
-                title="Offered"
-                jobs={categorizedJobs.Offered}
-                updateJob={updateJob}
-                deleteJob={deleteJob}
-                toggleForm={toggleForm}
-              />
-              <Column
-                title="Rejected"
-                jobs={categorizedJobs.Rejected}
-                updateJob={updateJob}
-                deleteJob={deleteJob}
-                toggleForm={toggleForm}
-              />
-              <Column
-                title="Follow-up"
-                jobs={categorizedJobs.FollowUp}
-                updateJob={updateJob}
-                deleteJob={deleteJob}
-                toggleForm={toggleForm}
-              />
+              {Object.keys(categorizedJobs).map((category) => (
+                <Column
+                  key={category}
+                  title={category}
+                  jobs={categorizedJobs[category]}
+                  updateJob={updateJob}
+                  deleteJob={deleteJob}
+                  toggleForm={toggleForm}
+                  searchQuery={searchQuery} // Pass searchQuery down to Column component
+                  highlightSearchTerm={highlightSearchTerm} // Pass highlightSearchTerm function down
+                />
+              ))}
             </>
           ) : (
             <TaskComponent />
@@ -182,7 +160,20 @@ const Dashboard = () => {
             aria-labelledby="modal-title"
             aria-describedby="modal-description"
           >
-            <Box sx={style}>
+            <Box
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: 600,
+                bgcolor: "#333",
+                boxShadow: 24,
+                p: 4,
+                borderRadius: 3,
+              }}
+              
+            >
               <IconButton
                 aria-label="close"
                 onClick={toggleForm}
@@ -194,7 +185,7 @@ const Dashboard = () => {
               >
                 <CloseIcon />
               </IconButton>
-              <Typography id="modal-title" variant="h6" component="h2">
+              <Typography variant="h6" component="h2" className="text-white">
                 Create a new Job
               </Typography>
               <JobForm fetchJobs={fetchJobs} authToken={authToken} />
