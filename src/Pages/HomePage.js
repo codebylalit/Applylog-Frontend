@@ -18,7 +18,7 @@ const Home = () => {
           src= {HomeScreen}
         />
       </section>
-      {/* <CTA1280px /> */}
+      <CTA1280px />
       <Footer1280px />
     </div>
   );

@@ -1,8 +1,29 @@
-import React, { useCallback } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link as RouterLink } from "react-router-dom"; // Assuming you're using react-router-dom
+import { Link as RouterLink } from "react-router-dom";
 
 const Footer1280px = ({ className = "" }) => {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3000/api/email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const result = await response.json();
+      setMessage(result.message);
+      setEmail("");
+    } catch (error) {
+      setMessage("Failed to submit email");
+    }
+  };
 
   return (
     <footer
@@ -56,22 +77,29 @@ const Footer1280px = ({ className = "" }) => {
           <div className="relative leading-[32px]">
             Updates right to your Inbox
           </div>
-          <div className="self-stretch flex flex-row items-start justify-start gap-[25px] mq450:flex-wrap">
+          <form
+            className="self-stretch flex flex-row items-start justify-start gap-[25px] mq450:flex-wrap"
+            onSubmit={handleSubmit}
+          >
             <input
               className="w-full [border:none] [outline:none] bg-darkslategray h-[50px] flex-1 rounded-mini overflow-hidden flex flex-row items-start justify-start py-[9px] px-[30px] box-border font-body-18 text-lg text-gray-500 min-w-[196px]"
               placeholder="Email Address"
-              type="text"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <button
               className="cursor-pointer [border:none] py-[9px] px-16 bg-plum rounded-mini flex flex-row items-start justify-start relative gap-[10px] hover:bg-cornflowerblue"
-              // onClick={}
+              type="submit"
             >
               <div className="h-full w-full absolute !m-[0] top-[0px] right-[0px] bottom-[0px] left-[0px] rounded-mini bg-plum" />
               <div className="relative text-lg leading-[32px] font-body-18 text-darkslategray text-center inline-block min-w-[46px] z-[1]">
                 Send
               </div>
             </button>
-          </div>
+          </form>
+          {message && <p className="text-white mt-2">{message}</p>}
         </div>
       </div>
     </footer>

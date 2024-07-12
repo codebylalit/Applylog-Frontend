@@ -9,6 +9,8 @@ const authRouter = require("./Routes/authRoutes");
 const jobRouter = require("./Routes/JobRoutes");
 const taskRouter = require("./Routes/tasks");
 const eventrouter = require("./Routes/event")
+const emailRouter = require("./Routes/emailroute");
+const contactRoutes = require("./Routes/contact");
 
 // Middleware
 app.use(bodyParser.json());
@@ -38,6 +40,9 @@ app.use("/api/auth", authRouter);
 app.use("/api/jobs", jobRouter); // Mount job routes
 app.use("/api/tasks", taskRouter); // Mount task routes
 app.use("/api/events", eventrouter); // Mount task routes
+app.use("/api", emailRouter); // Mount task routes
+app.use("/api", contactRoutes);
+
 
 // Start server
 app.listen(PORT, () => {
