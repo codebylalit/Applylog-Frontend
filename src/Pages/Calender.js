@@ -58,7 +58,7 @@ const Calendar = () => {
   const fetchUsername = async (token) => {
     try {
       const response = await axios.get(
-        "https://applylog-backend.onrender.com/api/auth/user",
+        "https://applylog-server.onrender.com/api/auth/user",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -72,7 +72,7 @@ const Calendar = () => {
   const fetchEvents = async (token) => {
     try {
       const response = await axios.get(
-        "https://applylog-backend.onrender.com/api/events",
+        "https://applylog-server.onrender.com/api/events",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -118,7 +118,7 @@ const Calendar = () => {
 
     try {
       const response = await axios.post(
-        "https://applylog-backend.onrender.com/api/events",
+        "https://applylog-server.onrender.com/api/events",
         { date: date.toString(), description, tag },
         { headers: { Authorization: `Bearer ${authToken}` } }
       );
@@ -180,7 +180,7 @@ const Calendar = () => {
 
     try {
       const response = await axios.put(
-        `https://applylog-backend.onrender.com/api/events/${eventToUpdate._id}`,
+        `https://applylog-server.onrender.com/api/events/${eventToUpdate._id}`,
         { description, tag },
         { headers: { Authorization: `Bearer ${authToken}` } }
       );
@@ -208,7 +208,7 @@ const Calendar = () => {
 
     try {
       const response = await axios.delete(
-        `https://applylog-backend.onrender.com/api/events/${eventToDelete._id}`,
+        `https://applylog-server.onrender.com/api/events/${eventToDelete._id}`,
         {
           headers: { Authorization: `Bearer ${authToken}` },
         }

@@ -21,7 +21,7 @@ const ContactForm1280px = ({ className = "" }) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://applylog-backend.onrender.com/api/contact",
+        "https://applylog-server.onrender.com/api/contact",
         {
           method: "POST",
           headers: {

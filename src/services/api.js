@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://applylog-backend.onrender.com",
+  baseURL: "https://applylog-server.onrender.com",
 });
 
 // Set JWT token in the Authorization header for all requests

@@ -39,7 +39,7 @@ const Dashboard = () => {
   const fetchUsername = async (token) => {
     try {
       const response = await axios.get(
-        "https://applylog-backend.onrender.com/api/auth/user",
+        "https://applylog-server.onrender.com/api/auth/user",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
