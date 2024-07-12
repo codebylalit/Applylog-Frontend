@@ -208,7 +208,7 @@ const Calendar = () => {
 
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/events/${eventToDelete._id}`,
+        `https://backend-7-j8xc.onrender.com/api/events/${eventToDelete._id}`,
         {
           headers: { Authorization: `Bearer ${authToken}` },
         }
