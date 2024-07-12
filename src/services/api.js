@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://backend-7-j8xc.onrender.com/",
 });
 
 // Set JWT token in the Authorization header for all requests

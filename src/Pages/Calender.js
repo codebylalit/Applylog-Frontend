@@ -57,9 +57,12 @@ const Calendar = () => {
 
   const fetchUsername = async (token) => {
     try {
-      const response = await axios.get("http://localhost:3000/api/auth/user", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        "https://backend-7-j8xc.onrender.com/api/auth/user",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setUsername(response.data.username);
     } catch (error) {
       console.error("Error fetching username:", error);
@@ -68,9 +71,12 @@ const Calendar = () => {
 
   const fetchEvents = async (token) => {
     try {
-      const response = await axios.get("http://localhost:3000/api/events", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        "https://backend-7-j8xc.onrender.com/api/events",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       console.log("Fetched events:", response.data);
 
       const eventsByDate = response.data.reduce((acc, event) => {
@@ -112,7 +118,7 @@ const Calendar = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/events",
+        "https://backend-7-j8xc.onrender.com/api/events",
         { date: date.toString(), description, tag },
         { headers: { Authorization: `Bearer ${authToken}` } }
       );
@@ -174,7 +180,7 @@ const Calendar = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/events/${eventToUpdate._id}`,
+        `https://backend-7-j8xc.onrender.com/api/events/${eventToUpdate._id}`,
         { description, tag },
         { headers: { Authorization: `Bearer ${authToken}` } }
       );
@@ -202,7 +208,7 @@ const Calendar = () => {
 
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/events/${eventToDelete._id}`,
+        `https://backend-7-j8xc.onrender.com/api/events/${eventToDelete._id}`,
         {
           headers: { Authorization: `Bearer ${authToken}` },
         }

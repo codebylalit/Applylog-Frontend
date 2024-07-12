@@ -38,9 +38,12 @@ const Dashboard = () => {
 
   const fetchUsername = async (token) => {
     try {
-      const response = await axios.get("http://localhost:3000/api/auth/user", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        "https://backend-7-j8xc.onrender.com/api/auth/user",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setUsername(response.data.username);
     } catch (error) {
       console.error("Error fetching username:", error);
