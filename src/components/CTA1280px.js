@@ -95,7 +95,7 @@ const ContactForm1280px = ({ className = "" }) => {
             </button>
           </form>
           {formMessage && (
-            <h6 className="text-lg font-thin mt-2">{formMessage}</h6>
+            <h6 className="text-lg font-thin mt-2 mr-10">{formMessage}</h6>
           )}
         </div>
       </div>

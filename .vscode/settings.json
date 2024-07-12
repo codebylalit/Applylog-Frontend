@@ -1,0 +1,21 @@
+{
+  "detectedConfig": {
+    "typescript": false,
+    "naming": "Pascal Case",
+    "unit": "px",
+    "framework": "react",
+    "styling": "Tailwind"
+  },
+  "locofyConfig": {
+    "project": "Web Dashboard UI - Task & Project Management (Community)",
+    "id": "667e73ac4bda45a1c82abd39",
+    "framework": "react",
+    "typescript": false,
+    "styling": "Tailwind",
+    "unit": "px",
+    "naming": "Pascal Case",
+    "path": "public/",
+    "componentsPath": "d:\\Web Devops\\registration-form\\src\\components",
+    "screensPath": "d:\\Web Devops\\registration-form\\src\\Pages"
+  }
+}
