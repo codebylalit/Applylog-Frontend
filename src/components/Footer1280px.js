@@ -10,7 +10,7 @@ const Footer1280px = ({ className = "" }) => {
     event.preventDefault();
     try {
       const response = await fetch(
-        "https://backend-7-j8xc.onrender.com/api/email",
+        "https://applylog-backend.onrender.com/api/email",
         {
           method: "POST",
           headers: {
