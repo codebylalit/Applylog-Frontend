@@ -4,11 +4,9 @@ import {
   HomeIcon,
   ClipboardListIcon,
   ChartBarIcon,
-  CogIcon,
   LogoutIcon,
   CalendarIcon,
 } from "@heroicons/react/outline";
-import { FeedbackOutlined, LocalCafe, LocalCafeOutlined } from "@mui/icons-material";
 
 const Sidebar = ({ onLogout }) => {
   const location = useLocation();
