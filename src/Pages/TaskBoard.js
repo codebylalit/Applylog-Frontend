@@ -17,6 +17,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 
 const TaskBoard = () => {
+  
   const [tasks, setTasks] = useState([]);
   const [authToken, setAuthToken] = useState("");
   const [showForm, setShowForm] = useState(false);
@@ -35,16 +36,17 @@ const TaskBoard = () => {
     }
   }, []);
 
-  const fetchTasks = async (token) => {
-    try {
-      const response = await axios.get("/api/tasks", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setTasks(response.data);
-    } catch (error) {
-      console.error("Error fetching tasks:", error);
-    }
-  };
+const fetchTasks = async (token) => {
+  try {
+    const response = await axios.get("/api/tasks", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setTasks(response.data);
+  } catch (error) {
+    alert("Error fetching tasks. Please try again later.");
+    console.error("Error fetching tasks:", error);
+  }
+};
 
   const fetchUsername = async (token) => {
     try {
@@ -57,17 +59,22 @@ const TaskBoard = () => {
     }
   };
 
-  const createTask = async (newData) => {
-    try {
-      await axios.post("/api/tasks", newData, {
-        headers: { Authorization: `Bearer ${authToken}` },
-      });
-      fetchTasks(authToken);
-      setShowForm(false); // Close the form after creating a task
-    } catch (error) {
-      console.error("Error creating task:", error);
+const createTask = async (newData) => {
+  try {
+    const response = await axios.post("/api/tasks", newData, {
+      headers: { Authorization: `Bearer ${authToken}` },
+    });
+    fetchTasks(authToken);
+    setShowForm(false); // Close the form after creating a task
+  } catch (error) {
+    if (error.response) {
+      console.error("Error creating task:", error.response.data.message);
+    } else {
+      console.error("Error creating task:", error.message);
     }
-  };
+  }
+};
+
 
   const deleteTask = async (id) => {
     try {
@@ -205,7 +212,7 @@ const TaskBoard = () => {
             {Object.keys(categorizedTasks).map((status) => (
               <div
                 key={status}
-                className="p-4 rounded-lg bg-gray-300 text-gray-100 "
+                className="p-4 rounded-lg bg-gray-300 text-gray-100"
               >
                 <div className="flex justify-between items-center mb-4">
                   <div className="text-xl font-bold">{status}</div>
@@ -329,8 +336,18 @@ const TaskBoard = () => {
                     name="deadline"
                     placeholder="Deadline"
                     defaultValue={editTaskData?.deadline || ""}
-                    className="w-full p-2 border border-gray-300 rounded bg-white focus:outline-none"
+                    className={`w-full p-2 border border-gray-300 rounded bg-white focus:outline-none ${
+                      editTaskData && !editTaskData.deadline
+                        ? "border-red-500"
+                        : ""
+                    }`}
+                    required // Ensure the field is required
                   />
+                  {editTaskData && !editTaskData.deadline && (
+                    <p className="text-red-500 text-sm mt-1">
+                      Deadline is required
+                    </p>
+                  )}
                 </div>
 
                 <div className="w-full">

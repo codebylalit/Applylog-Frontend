@@ -20,7 +20,7 @@ const Register = ({ className = "", setToken }) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://applylog-server.onrender.com/api/auth/register",
+        "https://applylog-serverside.onrender.com/api/auth/register",
         {
           method: "POST",
           headers: {
