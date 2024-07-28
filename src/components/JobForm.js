@@ -127,6 +127,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
               id="jobType"
               label="Job Type"
               name="jobType"
+              required
               value={formData.jobType}
               onChange={handleInputChange}
               className="bg-white rounded-md"
