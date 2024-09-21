@@ -35,7 +35,7 @@ const App = () => {
           <Route path="/login">
             <Login setToken={setToken} />
           </Route>
-          <Route path="/">
+          <Route path="/dashboard">
             {token ? <Dashboard token={token} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/taskboard" component={TaskComponent} />
@@ -44,7 +44,7 @@ const App = () => {
           <Route path="/privacy-policy" component={PrivacyPolicy} />
           <Route path="/terms-of-use" component={TermsOfUse} />
           <Route path="/cookies-policy" component={CookiesPolicy} />
-          <Route path="/s">
+          <Route path="/">
             <HomePage /> {/* Always render HomePage for the root route */}
           </Route>
         </Switch>
