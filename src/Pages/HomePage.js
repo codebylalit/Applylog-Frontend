@@ -8,16 +8,17 @@ const Home = () => {
     <div className="w-full relative bg-gray-100 flex flex-col items-start justify-start leading-[normal] tracking-[normal]">
       <TopBar1280px />
       <Header1280px />
-      <section className="self-stretch bg-gray-100 overflow-hidden flex flex-col items-center justify-start py-0 px-5 box-border gap-[66.5px] max-w-full lg:gap-[33px] mq750:gap-[17px]">
-      </section>
+      <section className="self-stretch bg-gray-100 overflow-hidden flex flex-col items-center justify-start py-0 px-5 box-border gap-[66.5px] max-w-full lg:gap-[33px] mq750:gap-[17px]"></section>
+
       <section className="self-stretch h-[700px] relative bg-gray-100 overflow-hidden shrink-0">
-        <div className="absolute top-[calc(50%_-_250px)] left-[calc(50%_-_540px)] rounded-xl bg-cornsilk w-[1080px] h-[500px]" />
+        <div className="absolute top-[calc(50%_-_250px)] left-[50%] transform -translate-x-1/2 rounded-xl bg-cornsilk w-full max-w-[90%] sm:max-w-[720px] md:max-w-[900px] lg:max-w-[1080px] h-[850px] sm:h-[350px] md:h-[400px] lg:h-[202px]" />
         <img
-          className="absolute top-[180px] left-[calc(50%_-_540px)] w-[1080px] h-[420px] object-contain z-[1]"
+          className="absolute top-[180px] left-[50%] transform -translate-x-1/2 w-full max-w-[80%] sm:max-w-[620px] md:max-w-[500px] lg:max-w-[350px] xl:max-w-[350px] h-auto object-contain z-[1]"
           alt=""
-          src= {HomeScreen}
+          src={HomeScreen}
         />
       </section>
+
       <CTA1280px />
       <Footer1280px />
     </div>

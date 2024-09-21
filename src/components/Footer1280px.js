@@ -37,20 +37,21 @@ const Footer1280px = ({ className = "" }) => {
         <div className="flex-1 flex flex-col items-start justify-start gap-[44px] min-w-[389px] max-w-full mq750:gap-[22px] mq750:min-w-full">
           <div className="flex flex-row items-start justify-start p-[5px] relative">
             <div className="h-full w-full absolute !m-[0] top-[0px] right-[0px] bottom-[0px] left-[0px] bg-gray-400" />
-            <div className="relative leading-[24px] font-semibold inline-block min-w-[79px] z-[1] mq450:text-lgi mq450:leading-[19px]">
+            <div className="relative leading-[24px] font-semibold inline-block min-w-[79px] z-[1] mq450:text-lg mq450:leading-[19px]">
               ApplyLog
             </div>
           </div>
           <div className="self-stretch flex flex-row items-start justify-start gap-[30px] text-lg mq750:flex-wrap">
             <div className="flex-1 flex flex-row items-start justify-start gap-[10px] min-w-[86px]">
-              <div className="relative leading-[32px] font-semibold inline-block min-w-[15px]">
+              <div className="relative leading-[32px] inline-block ">
                 ©
               </div>
-              <div className="relative leading-[32px] font-semibold inline-block min-w-[106px]">
+              <div className="relative leading-[32px] inline-block">
                 ApplyLog 2024
               </div>
             </div>
-            <div className="flex-1 relative leading-[32px] font-semibold inline-block min-w-[86px]">
+
+            <div className="flex-1 relative leading-[32px] inline-block min-w-[86px] mq450:text-sm">
               <RouterLink
                 to="/privacy-policy"
                 className="footer-link no-underline text-white"
@@ -58,7 +59,7 @@ const Footer1280px = ({ className = "" }) => {
                 Privacy Policy
               </RouterLink>
             </div>
-            <div className="flex-1 relative leading-[32px] font-semibold inline-block min-w-[86px]">
+            <div className="flex-1 relative leading-[32px]  inline-block min-w-[86px] mq450:text-sm">
               <RouterLink
                 to="/cookies-policy"
                 className="footer-link no-underline text-white"
@@ -66,7 +67,7 @@ const Footer1280px = ({ className = "" }) => {
                 Cookies Policy
               </RouterLink>
             </div>
-            <div className="relative leading-[32px] font-semibold inline-block min-w-[117px]">
+            <div className="relative leading-[32px]  inline-block min-w-[117px] mq450:text-sm">
               <RouterLink
                 to="/terms-of-use"
                 className="footer-link no-underline text-white"
