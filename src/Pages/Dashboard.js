@@ -117,9 +117,9 @@ const Dashboard = () => {
   return (
     <div className="flex min-h-screen font-body-18 bg-gray-100 text-white">
       <Sidebar onLogout={logout} setCurrentView={setCurrentView} />
-      <div className="flex-1 flex flex-col ml-56">
+      <div className="flex-1 bg-gray-100 flex flex-col ml-56 w-fit">
         <div className="flex items-center justify-between p-6 bg-gray-100">
-          <div className="relative flex items-center rounded-lg">
+          <div className="relative w-full flex items-center rounded-lg">
             <SearchIcon className="absolute left-3 w-6 h-6 text-gray-500" />
             <input
               type="text"
@@ -169,7 +169,8 @@ const Dashboard = () => {
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                width: 600,
+                width: "90%", // Adjust width for mobile
+                maxWidth: 600, // Limit maximum width
                 bgcolor: "#333",
                 boxShadow: 24,
                 p: 4,
