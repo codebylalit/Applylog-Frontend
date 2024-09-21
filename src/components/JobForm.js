@@ -1,37 +1,8 @@
 import React, { useState } from "react";
 import axios from "../services/api";
-import { makeStyles } from "@mui/styles";
-import {
-  Container,
-  TextField,
-  Button,
-  Typography,
-  MenuItem,
-  Grid,
-} from "@mui/material";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: "gray",
-    "&:hover": {
-      backgroundColor: "gray",
-    },
-  },
-}));
+import { Container, TextField, Button, MenuItem, Grid } from "@mui/material";
 
 const JobForm = ({ fetchJobs, authToken }) => {
-  const classes = useStyles();
   const [formData, setFormData] = useState({
     company: "",
     position: "",
@@ -82,7 +53,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
     <Container
       component="main"
       maxWidth="sm"
-      className=" rounded-xl mx-auto mt-8 font-body-18"
+      className="rounded-xl mx-auto mt-8 font-body-18"
     >
       <form className="space-y-6" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -156,6 +127,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
               id="jobType"
               label="Job Type"
               name="jobType"
+              required
               value={formData.jobType}
               onChange={handleInputChange}
               className="bg-white rounded-md"
@@ -244,7 +216,7 @@ const JobForm = ({ fetchJobs, authToken }) => {
           type="submit"
           fullWidth
           variant="contained"
-          className= "text-white py-2 px-4 rounded-md mt-4"
+          className="text-white py-2 px-4 rounded-md mt-4 bg-gray-700 hover:bg-gray-600"
         >
           Save & Close
         </Button>

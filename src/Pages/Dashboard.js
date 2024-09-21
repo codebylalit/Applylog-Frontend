@@ -39,7 +39,7 @@ const Dashboard = () => {
   const fetchUsername = async (token) => {
     try {
       const response = await axios.get(
-        "https://backend-7-j8xc.onrender.com/api/auth/user",
+        "https://applylog-serverside.onrender.com/api/auth/user",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -175,7 +175,6 @@ const Dashboard = () => {
                 p: 4,
                 borderRadius: 3,
               }}
-              
             >
               <IconButton
                 aria-label="close"

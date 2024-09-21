@@ -14,6 +14,7 @@ import {
   Menu,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Sidebar from "../components/Sidebar"; // Assuming Sidebar is your sidebar component
@@ -25,7 +26,8 @@ const Calendar = () => {
   const days = ["SUN", "MON", "TUE", "WED", "THUR", "FRI", "SAT"];
   const [events, setEvents] = useState({});
   const [open, setOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorElMap, setAnchorElMap] = useState({});
+
   const [newEvent, setNewEvent] = useState({
     date: "",
     description: "",
@@ -46,6 +48,22 @@ const Calendar = () => {
     })
   );
 
+  // Function to handle opening the menu for an event
+  const handleMenuOpen = (date, eventIndex, event) => {
+    setAnchorElMap((prevMap) => ({
+      ...prevMap,
+      [`${date}_${eventIndex}`]: event.currentTarget,
+    }));
+  };
+
+  // Function to handle closing the menu for an event
+  const handleMenuClose = (date, eventIndex) => {
+    setAnchorElMap((prevMap) => ({
+      ...prevMap,
+      [`${date}_${eventIndex}`]: null,
+    }));
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -58,7 +76,7 @@ const Calendar = () => {
   const fetchUsername = async (token) => {
     try {
       const response = await axios.get(
-        "https://backend-7-j8xc.onrender.com/api/auth/user",
+        "https://applylog-serverside.onrender.com/api/auth/user",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -72,13 +90,14 @@ const Calendar = () => {
   const fetchEvents = async (token) => {
     try {
       const response = await axios.get(
-        "https://backend-7-j8xc.onrender.com/api/events",
+        "https://applylog-serverside.onrender.com/api/events",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
       console.log("Fetched events:", response.data);
 
+      // Assuming events are already filtered by backend for the logged-in user
       const eventsByDate = response.data.reduce((acc, event) => {
         const { date, ...eventData } = event;
         const dateString = date.toString(); // Ensure date is a string
@@ -118,7 +137,7 @@ const Calendar = () => {
 
     try {
       const response = await axios.post(
-        "https://backend-7-j8xc.onrender.com/api/events",
+        "https://applylog-serverside.onrender.com/api/events",
         { date: date.toString(), description, tag },
         { headers: { Authorization: `Bearer ${authToken}` } }
       );
@@ -143,6 +162,30 @@ const Calendar = () => {
       handleClose();
     } catch (error) {
       console.error("Error adding event:", error);
+    }
+  };
+
+  const handleDelete = async (date, eventIndex) => {
+    const eventToDelete = events[date][eventIndex];
+
+    try {
+      const response = await axios.delete(
+        `https://applylog-serverside.onrender.com/api/events/${eventToDelete._id}`,
+        {
+          headers: { Authorization: `Bearer ${authToken}` },
+        }
+      );
+      console.log("Event deleted:", response.data);
+
+      setEvents((prevEvents) => {
+        const updatedEvents = { ...prevEvents };
+        updatedEvents[date] = updatedEvents[date].filter(
+          (event) => event._id !== eventToDelete._id
+        );
+        return updatedEvents;
+      });
+    } catch (error) {
+      console.error("Error deleting event:", error);
     }
   };
 
@@ -180,7 +223,7 @@ const Calendar = () => {
 
     try {
       const response = await axios.put(
-        `https://backend-7-j8xc.onrender.com/api/events/${eventToUpdate._id}`,
+        `https://applylog-serverside.onrender.com/api/events/${eventToUpdate._id}`,
         { description, tag },
         { headers: { Authorization: `Bearer ${authToken}` } }
       );
@@ -203,30 +246,6 @@ const Calendar = () => {
     }
   };
 
-  const handleDelete = async (date, eventIndex) => {
-    const eventToDelete = events[date][eventIndex];
-
-    try {
-      const response = await axios.delete(
-        `https://backend-7-j8xc.onrender.com/api/events/${eventToDelete._id}`,
-        {
-          headers: { Authorization: `Bearer ${authToken}` },
-        }
-      );
-      console.log("Event deleted:", response.data);
-
-      setEvents((prevEvents) => {
-        const updatedEvents = { ...prevEvents };
-        updatedEvents[date] = updatedEvents[date].filter(
-          (_, index) => index !== eventIndex
-        );
-        return updatedEvents;
-      });
-    } catch (error) {
-      console.error("Error deleting event:", error);
-    }
-  };
-
   return (
     <div className="flex min-h-screen font-body-18 bg-gray-100 text-black">
       <Sidebar onLogout={() => {}} setCurrentView={() => {}} />
@@ -242,9 +261,7 @@ const Calendar = () => {
               {currentDate.toLocaleString("default", { month: "long" })},{" "}
               {currentYear}
             </Typography>
-            <Button
-              variant="contained"
-              color="primary"
+            <button
               onClick={() => {
                 setNewEvent({
                   date: "",
@@ -254,9 +271,11 @@ const Calendar = () => {
                 });
                 handleClickOpen();
               }}
+              className="flex items-center cursor-pointer text-gray-100 px-3 py-1 rounded-lg font-semibold "
             >
+              <AddIcon />
               Add Event
-            </Button>
+            </button>
           </div>
 
           {/* <Typography variant="h6" className="text-white">
@@ -280,8 +299,8 @@ const Calendar = () => {
                     <Box
                       border={1}
                       borderRadius={2}
-                      p={2}
-                      m={1}
+                      p={1}
+                      m={0.5}
                       minHeight={100}
                       bgcolor="#333"
                     >
@@ -315,6 +334,11 @@ const Calendar = () => {
                               borderRadius={1}
                               p={0.5}
                               mt={0.5}
+                              className="relative"
+                              style={{
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                              }}
                             >
                               <Typography variant="body2" align="center">
                                 {event.description}
@@ -323,15 +347,26 @@ const Calendar = () => {
                                 <IconButton
                                   size="small"
                                   onClick={(event) =>
-                                    setAnchorEl(event.currentTarget)
+                                    handleMenuOpen(
+                                      date.toString(),
+                                      eventIndex,
+                                      event
+                                    )
                                   }
+                                  className="absolute bottom-[10px] right-[10px]"
                                 >
                                   <MoreVertIcon fontSize="small" />
                                 </IconButton>
                                 <Menu
-                                  anchorEl={anchorEl}
-                                  open={Boolean(anchorEl)}
-                                  onClose={() => setAnchorEl(null)}
+                                  anchorEl={
+                                    anchorElMap[`${date}_${eventIndex}`]
+                                  }
+                                  open={Boolean(
+                                    anchorElMap[`${date}_${eventIndex}`]
+                                  )}
+                                  onClose={() =>
+                                    handleMenuClose(date.toString(), eventIndex)
+                                  }
                                 >
                                   <MenuItem
                                     onClick={() => {
@@ -342,7 +377,10 @@ const Calendar = () => {
                                         tag: event.tag,
                                       });
                                       handleClickOpen();
-                                      setAnchorEl(null);
+                                      handleMenuClose(
+                                        date.toString(),
+                                        eventIndex
+                                      ); // Close menu after setting new event
                                     }}
                                   >
                                     Edit
@@ -350,7 +388,10 @@ const Calendar = () => {
                                   <MenuItem
                                     onClick={() => {
                                       handleDelete(date.toString(), eventIndex);
-                                      setAnchorEl(null);
+                                      handleMenuClose(
+                                        date.toString(),
+                                        eventIndex
+                                      ); // Close menu after delete
                                     }}
                                   >
                                     Delete
@@ -385,6 +426,7 @@ const Calendar = () => {
                 fullWidth
                 value={newEvent.date}
                 onChange={handleChange}
+                className="bg-white rounded-md"
               />
               <TextField
                 margin="dense"
@@ -394,6 +436,12 @@ const Calendar = () => {
                 fullWidth
                 value={newEvent.description}
                 onChange={handleChange}
+                className="bg-white rounded-md"
+                InputProps={{
+                  classes: {
+                    input: "overflow-hidden", // Ensure text overflow is hidden
+                  },
+                }}
               />
               <TextField
                 select
@@ -403,6 +451,7 @@ const Calendar = () => {
                 fullWidth
                 value={newEvent.tag}
                 onChange={handleChange}
+                className="bg-white rounded-md"
               >
                 <MenuItem value="Design">Design</MenuItem>
                 <MenuItem value="Development">Development</MenuItem>

@@ -5,10 +5,9 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
-import Dashboard from "./Pages/Dashboard"
+import Dashboard from "./Pages/Dashboard";
 import HomePage from "./Pages/HomePage";
 import TaskComponent from "./Pages/TaskBoard";
 import Analytics from "./Pages/Analytics";
@@ -16,8 +15,6 @@ import Calendar from "./Pages/Calender";
 import PrivacyPolicy from "./components/data/Privacy";
 import TermsOfUse from "./components/data/termsofuse";
 import CookiesPolicy from "./components/data/cookies";
-
-const theme = createTheme(); // Create a theme
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -31,7 +28,7 @@ const App = () => {
   }, [token]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <div className="font-sans">
       <Router>
         <Switch>
           <Route path="/register" component={Register} />
@@ -47,13 +44,12 @@ const App = () => {
           <Route path="/privacy-policy" component={PrivacyPolicy} />
           <Route path="/terms-of-use" component={TermsOfUse} />
           <Route path="/cookies-policy" component={CookiesPolicy} />
-
           <Route path="/">
             <HomePage /> {/* Always render HomePage for the root route */}
           </Route>
         </Switch>
       </Router>
-    </ThemeProvider>
+    </div>
   );
 };
 

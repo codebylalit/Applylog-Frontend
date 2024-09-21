@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   HomeIcon,
   ClipboardListIcon,
   ChartBarIcon,
-  CogIcon,
   LogoutIcon,
   CalendarIcon,
 } from "@heroicons/react/outline";
-import { FeedbackOutlined, LocalCafe, LocalCafeOutlined } from "@mui/icons-material";
+import { Face2Outlined } from "@mui/icons-material";
 
 const Sidebar = ({ onLogout }) => {
   const location = useLocation();
+    const [logoVisible, setLogoVisible] = useState(false);
+
+    const handleMouseEnter = () => {
+      setLogoVisible(true);
+    };
+
+    const handleMouseLeave = () => {
+      setLogoVisible(false);
+    };
 
   const isActive = (path) => {
     return location.pathname === path;
@@ -20,8 +28,19 @@ const Sidebar = ({ onLogout }) => {
   return (
     <div className="fixed w-50 bg-gray-100 h-full flex flex-col justify-between border-r-2 border-gray-200 shadow-2xl border-solid">
       <div>
-        <div className="flex items-center justify-center h-16 px-4">
-          <h2 className="text-xl font-bold text-white">ApplyLog</h2>
+        <div
+          className="flex items-center justify-center h-16 px-4"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <h2 className="text-xl font-bold text-white cursor-pointer relative">
+            ApplyLog
+            {logoVisible && (
+              <span className="absolute left-[-30px] top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Face2Outlined className="h-6 w-6" />
+              </span>
+            )}
+          </h2>
         </div>
         <nav className="flex-1 px-2 py-2">
           <ul className="space-y-8 list-none">
@@ -83,7 +102,7 @@ const Sidebar = ({ onLogout }) => {
               <Link
                 to="/calender"
                 className={`flex items-center space-x-2 no-underline text-lg ${
-                  isActive("/settings")
+                  isActive("/calender")
                     ? "text-white relative"
                     : "text-gray-500 hover:text-white"
                 }`}
@@ -103,7 +122,7 @@ const Sidebar = ({ onLogout }) => {
       <div className="p-8 border-t ml-8 right-20 ">
         <button
           onClick={onLogout}
-          className="mt-4 bg-gray-100 text-white px-2 py-1 rounded flex items-center space-x-2 no-underline text-lg"
+          className="mt-4 bg-gray-100 cursor-pointer text-white px-2 py-1 rounded flex items-center space-x-2 no-underline text-lg"
         >
           <LogoutIcon className="h-6 w-6" />
           <span>Logout</span>

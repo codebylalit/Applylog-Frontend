@@ -13,6 +13,7 @@ const TopBar1280px = ({ className = "" }) => {
           <a className="[text-decoration:none] relative leading-[24px] font-semibold text-[inherit] inline-block min-w-[79px] whitespace-nowrap z-[1]">
             ApplyLog
           </a>
+          
         </div>
       </div>
 
