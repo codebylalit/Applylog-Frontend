@@ -117,7 +117,7 @@ const Dashboard = () => {
   return (
     <div className="flex min-h-screen font-body-18 bg-gray-100 text-white">
       <Sidebar onLogout={logout} setCurrentView={setCurrentView} />
-      <div className="flex-1 bg-gray-100 flex flex-col ml-56 w-fit">
+      <div className="flex-1 bg-gray-100 flex flex-col ml-56">
         <div className="flex items-center justify-between p-6 bg-gray-100">
           <div className="relative w-full flex items-center rounded-lg">
             <SearchIcon className="absolute left-3 w-6 h-6 text-gray-500" />
